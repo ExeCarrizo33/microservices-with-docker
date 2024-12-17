@@ -1,4 +1,4 @@
-package com.backend.ordersservice;
+package com.backend.orders_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

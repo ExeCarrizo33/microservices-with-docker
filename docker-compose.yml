@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db-inventory:
+    container_name: db-inventory
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ms_inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sasa1234
+    ports:
+      - 5431:5431
+    expose:
+      - 5431
+    command:
+      - -p 5431
+
+
+  db-orders:
+    container_name: db-orders
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ms_inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sasa1234
+    ports:
+      - 5431:5431
+    expose:
+      - 5431
+    command:
+      - -p 5431
+
+

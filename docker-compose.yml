@@ -13,23 +13,38 @@ services:
       - 5431:5431
     expose:
       - 5431
-    command:
-      - -p 5431
+    command: -p 5431
 
 
   db-orders:
     container_name: db-orders
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DB: ms_orders
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    command: -p 3306
+
+  ### Posgres database for Products
+  db-products:
+    container_name: db-products
     image: postgres:17
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ms_inventory
+      POSTGRES_DB: ms_products
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: sasa1234
     ports:
-      - 5431:5431
+      - 5432:5432
     expose:
-      - 5431
-    command:
-      - -p 5431
+      - 5432
+    command: -p 5432
+
 
 

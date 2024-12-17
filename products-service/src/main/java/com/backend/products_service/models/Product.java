@@ -1,17 +1,15 @@
 package com.backend.products_service.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Table(name = "product")
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Table(name="product")
 public class Product {
 
     @Id

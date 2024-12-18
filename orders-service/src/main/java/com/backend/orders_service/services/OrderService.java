@@ -26,7 +26,7 @@ public class OrderService {
         //Check for inventory
         BaseResponse result =this.webClientBuilder.build()
                 .post()
-                .uri("http//:localhost:8083/api/inventory/in-stock")
+                .uri("http://localhost:8083/api/inventory/in-stock")
                 .bodyValue(orderRequest.getOrderItems())
                 .retrieve()
                 .bodyToMono(BaseResponse.class)
@@ -40,12 +40,15 @@ public class OrderService {
                     .map(orderItemRequest -> mapOrderItemRequestToOrderItem(orderItemRequest, order))
                     .toList());
 
+            this.orderRepository.save(order);
+
+
         }else {
             throw new IllegalArgumentException("Some of the products are not in stock");
         }
     }
 
-    private Order mapOrderItemRequestToOrderItem(OrderItemRequest orderItemRequest, Order order){
+    private OrderItems mapOrderItemRequestToOrderItem(OrderItemRequest orderItemRequest, Order order){
         return OrderItems.builder()
                 .id(orderItemRequest.getId())
                 .sku(orderItemRequest.getSku())

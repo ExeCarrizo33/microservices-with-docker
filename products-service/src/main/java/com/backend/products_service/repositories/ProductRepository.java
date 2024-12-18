@@ -1,4 +1,4 @@
-package com.backend.products_service.repository;
+package com.backend.products_service.repositories;
 
 import com.backend.products_service.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

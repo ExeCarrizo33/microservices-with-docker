@@ -5,13 +5,12 @@ import com.backend.orders_service.models.OrderItems;
 import com.backend.orders_service.models.dto.BaseResponse;
 import com.backend.orders_service.models.dto.OrderItemRequest;
 import com.backend.orders_service.models.dto.OrderRequest;
-import com.backend.orders_service.repository.OrderRepository;
+import com.backend.orders_service.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

@@ -18,18 +18,16 @@ services:
 
   db-orders:
     container_name: db-orders
-    image: mysql:8.0.33
+    image: mysql:8.0.36
     restart: unless-stopped
     environment:
       MYSQL_DB: ms_orders
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3307:3306
+      - 3307:3307
     expose:
-      - 3306
-    command: -p 3306
+      - 3307
+    command: --port=3307
 
   ### Posgres database for Products
   db-products:

@@ -1,6 +1,6 @@
 package com.backend.inventory_service.repositories;
 
-import com.backend.inventory_service.models.Inventory;
+import com.backend.inventory_service.models.entities.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

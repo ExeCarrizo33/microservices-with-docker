@@ -1,33 +1,23 @@
-package com.backend.orders_service.models;
-
+package com.backend.inventory_service.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table
+@Table(name = "inventory")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderItems {
+public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String sku;
-    private Double price;
+
     private Long quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-
 }
-
-
-
-

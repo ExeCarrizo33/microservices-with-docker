@@ -1,7 +1,7 @@
 package com.backend.inventory_service.services;
 
 
-import com.backend.inventory_service.models.Inventory;
+import com.backend.inventory_service.models.entities.Inventory;
 import com.backend.inventory_service.models.dto.BaseResponse;
 import com.backend.inventory_service.models.dto.OrderItemRequest;
 import com.backend.inventory_service.repositories.InventoryRepository;

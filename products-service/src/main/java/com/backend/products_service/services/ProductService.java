@@ -1,6 +1,6 @@
 package com.backend.products_service.services;
 
-import com.backend.products_service.models.Product;
+import com.backend.products_service.models.entities.Product;
 import com.backend.products_service.models.dtos.ProductRequest;
 import com.backend.products_service.models.dtos.ProductResponse;
 import com.backend.products_service.repositories.ProductRepository;

@@ -1,6 +1,6 @@
 package com.backend.inventory_service.utils;
 
-import com.backend.inventory_service.models.Inventory;
+import com.backend.inventory_service.models.entities.Inventory;
 import com.backend.inventory_service.repositories.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

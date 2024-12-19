@@ -2,14 +2,13 @@ package com.backend.orders_service.services;
 
 import com.backend.orders_service.models.Order;
 import com.backend.orders_service.models.OrderItems;
-import com.backend.orders_service.models.dto.BaseResponse;
-import com.backend.orders_service.models.dto.OrderItemRequest;
-import com.backend.orders_service.models.dto.OrderRequest;
+import com.backend.orders_service.models.dto.*;
 import com.backend.orders_service.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -47,6 +46,22 @@ public class OrderService {
         }
     }
 
+    public List<OrderResponse> getAllOrders(){
+        List<Order> orders = this.orderRepository.findAll();
+
+        return orders.stream().map(this::mapOrderToOrderResponse).toList();
+
+    }
+
+    private OrderResponse mapOrderToOrderResponse(Order order) {
+        return new OrderResponse(order.getId(), order.getOrderNumber(), order.getOrderItems().stream()
+                .map(this::mapOrderItemRequest).toList());
+    }
+
+    private OrderItemsResponse mapOrderItemRequest(OrderItems orderItems) {
+        return new OrderItemsResponse(orderItems.getId(), orderItems.getSku(), orderItems.getPrice(), orderItems.getQuantity());
+    }
+
     private OrderItems mapOrderItemRequestToOrderItem(OrderItemRequest orderItemRequest, Order order){
         return OrderItems.builder()
                 .id(orderItemRequest.getId())
@@ -56,4 +71,6 @@ public class OrderService {
                 .order(order)
                 .build();
     }
+
+
 }

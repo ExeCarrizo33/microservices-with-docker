@@ -17,7 +17,7 @@ public class InventoryConfig {
     public BaseResponse checkStock(List<OrderItemRequest> orderItems){
         return this.webClientBuilder.build()
                 .post()
-                .uri("http://localhost:8083/api/inventory/in-stock")
+                .uri("http://localhost:8080/api/inventory/in-stock")
                 .bodyValue(orderItems)
                 .retrieve()
                 .bodyToMono(BaseResponse.class)

@@ -8,6 +8,7 @@ import com.backend.orders_service.repositories.OrderRepository;
 import com.backend.orders_service.services.Config.InventoryConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class OrderService {
      * @param orderRequest la solicitud del pedido que contiene los elementos del pedido.
      * @throws IllegalArgumentException si algunos de los productos no están en stock.
      */
+    @Transactional
     public void placeOrder(OrderRequest orderRequest){
 
         // Verificar el inventario

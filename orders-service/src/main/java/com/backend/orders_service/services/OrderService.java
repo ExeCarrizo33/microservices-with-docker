@@ -30,7 +30,7 @@ public class OrderService {
      * @throws IllegalArgumentException si algunos de los productos no están en stock.
      */
     @Transactional
-    public void placeOrder(OrderRequest orderRequest){
+    public OrderResponse placeOrder(OrderRequest orderRequest){
 
         // Verificar el inventario
         BaseResponse result = inventoryConfig.checkStock(orderRequest.getOrderItems());
@@ -51,8 +51,11 @@ public class OrderService {
             // Asigna la lista de OrderItems a la entidad Order.
             order.setOrderItems(orderItems);
 
-            this.orderRepository.save(order);
+            //Guarda la orden
+            var savedOrder = this.orderRepository.save(order);
 
+            //Mapea la entidad guardada a un DTO de respuesta
+            return orderMapper.mapToOrderResponse(savedOrder);
 
         }else {
             throw new IllegalArgumentException("Some of the products are not in stock");

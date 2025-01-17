@@ -1,12 +1,16 @@
 package com.backend.orders_service.services;
 
+import com.backend.orders_service.events.OrderEvent;
 import com.backend.orders_service.models.dto.mappers.OrderMapper;
 import com.backend.orders_service.models.entities.Order;
 import com.backend.orders_service.models.entities.OrderItems;
 import com.backend.orders_service.models.dto.*;
+import com.backend.orders_service.models.enums.OrderStatus;
 import com.backend.orders_service.repositories.OrderRepository;
 import com.backend.orders_service.services.Config.InventoryConfig;
+import com.backend.orders_service.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,7 @@ public class OrderService {
     private  final OrderRepository orderRepository;
     private final InventoryConfig inventoryConfig;
     private final OrderMapper orderMapper;
+    private final KafkaTemplate<String,String> kafkaTemplate;
 
     /**
      * Realiza un pedido verificando primero el inventario.
@@ -53,6 +58,11 @@ public class OrderService {
 
             //Guarda la orden
             var savedOrder = this.orderRepository.save(order);
+
+            //Notifica al order topic con un mensaje de pedido realizado
+            this.kafkaTemplate.send("orders-topic", JsonUtils.toJson(
+                    new OrderEvent(savedOrder.getOrderNumber(), savedOrder.getOrderItems().size(), OrderStatus.PLACED)
+            ));
 
             //Mapea la entidad guardada a un DTO de respuesta
             return orderMapper.mapToOrderResponse(savedOrder);
